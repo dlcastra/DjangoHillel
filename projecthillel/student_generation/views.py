@@ -18,9 +18,6 @@ def generation_student():
     student.save()
 
 
-
-
-
 def create_one_student(request):
     generation_student()
 
