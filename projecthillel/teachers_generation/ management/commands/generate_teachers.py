@@ -23,6 +23,7 @@ class Command(BaseCommand):
 
             self.stdout.write(
                 self.style.SUCCESS(
-                    "The teacher has been successfully added to the database, his id: '%s'" % teacher.id
+                    "The teacher has been successfully added to the database, his id: '%s'"
+                    % teacher.id
                 )
             )
