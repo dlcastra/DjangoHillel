@@ -35,6 +35,8 @@ def create_multiply_students(request):
             "Ви не можете згенерувати меньше одного або більше ніж 100 студентів"
         )
 
+
+
     for _ in range(count):
         generation_student()
 
