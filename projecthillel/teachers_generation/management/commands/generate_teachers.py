@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from faker import Faker
 
-from projecthillel.teachers_generation.models import Teacher
+from teachers_generation.models import Teacher
 
 fake = Faker()
 
@@ -10,10 +10,16 @@ class Command(BaseCommand):
     help = "Add the specified number of teachers to the database"
 
     def add_arguments(self, parser):
-        parser.add_argument("number", type=int)
+        parser.add_argument("number", type=int, nargs="?", default=100)
 
     def handle(self, *args, **options):
-        for i in range(options["number"]):
+        number = options["number"]
+        if number < 1:
+            self.stdout.write(
+                self.style.ERROR("The number to be generated must be greater than 0")
+            )
+
+        for i in range(number):
             teacher = Teacher.objects.create(
                 first_name=fake.first_name(),
                 last_name=fake.last_name(),
@@ -24,6 +30,6 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.SUCCESS(
                     "The teacher has been successfully added to the database, his id: '%s'"
-                    % teacher.id
+                    % teacher.teacher_id
                 )
             )
