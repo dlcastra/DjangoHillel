@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class StudentGenerationConfig(AppConfig):
+class TeachersGenerationConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "student_generation"
+    name = "teachers_generation"
