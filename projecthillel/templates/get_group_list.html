@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <th>Назва групи</th>
+      <th>Куратор групи</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for group in groups %}
+    <tr>
+      <td>{{ group.group_name }}</td>
+      <td>{{ group.curator }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

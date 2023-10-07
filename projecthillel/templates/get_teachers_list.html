@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr>
+      <th>Ім'я</th>
+      <th>Прізвище</th>
+      <th>По батькові</th>
+      <th>Дата народження</th>
+      <th>Предмет</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for teacher in teachers %}
+    <tr>
+      <td>{{ teacher.first_name }}</td>
+      <td>{{ teacher.surname }}</td>
+      <td>{{ teacher.patronymic }}</td>
+      <td>{{ teacher.birth_date|date:"Y-m-d" }}</td>
+      <td>{{ teacher.subject }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
