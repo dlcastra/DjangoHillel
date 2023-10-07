@@ -1,6 +1,12 @@
 from django.urls import path
 
-from school.views import teacher_form, get_teachers_list, group_form, get_group_list, main_page
+from school.views import (
+    teacher_form,
+    get_teachers_list,
+    group_form,
+    get_group_list,
+    main_page,
+)
 
 urlpatterns = [
     path("teacher/", teacher_form, name="teacher_form"),
