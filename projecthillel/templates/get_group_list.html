@@ -1,6 +1,7 @@
 <table>
   <thead>
     <tr>
+      <th>ID групи</th>
       <th>Назва групи</th>
       <th>Куратор групи</th>
     </tr>
@@ -8,6 +9,7 @@
   <tbody>
     {% for group in groups %}
     <tr>
+      <td>{{ group.id }}</td>
       <td>{{ group.group_name }}</td>
       <td>{{ group.curator }}</td>
     </tr>
