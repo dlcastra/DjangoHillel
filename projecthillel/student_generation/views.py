@@ -1,10 +1,14 @@
 from django.http import HttpResponse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 
 from faker import Faker
 
+from .forms import StudentForm
 from .models import CreateStudent
 
 fake = Faker()
+
+""" --- Generation of one or more random students  --- """
 
 
 def generation_student():
@@ -39,3 +43,48 @@ def create_multiply_students(request):
         generation_student()
 
     return HttpResponse(f"Ви успішно знерували дані {count} студентів/та")
+
+
+""" --- CRUD with the CreateStudent model ---"""
+
+
+def create_student(request):
+    if request.method == "GET":
+        form = StudentForm()
+        return render(request, "create_student.html", {"student": form})
+
+    form = StudentForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect("get_student_list")
+
+
+def get_student_list(request):
+    students = CreateStudent.objects.all()
+    return render(request, "get_student_list.html", {"students": students})
+
+
+def edit_student(request, pk):
+    student = CreateStudent.objects.get(pk=pk)
+    if request.method == "GET":
+        form = StudentForm(instance=student)
+        return render(request, "edit_student.html", {"student": form})
+
+    form = StudentForm(request.POST, instance=student)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse("get_student_list"))
+
+    return render(request, "edit_student.html", {"student": form})
+
+
+def delete_student(request, pk):
+    student = get_object_or_404(CreateStudent, pk=pk)
+    if request.method == "GET":
+        form = StudentForm(instance=student)
+        return render(request, "edit_student.html", {"student": form})
+
+    form = StudentForm(request.POST, instance=student)
+    if form.is_valid():
+        student.delete()
+        return redirect(reverse("get_student_list"))
