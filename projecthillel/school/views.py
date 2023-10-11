@@ -14,14 +14,14 @@ def main_page(request):
 def create_teacher(request):
     if request.method == "GET":
         form = TeachersForm()
-        return render(request, "teachers_form.html", {"form": form})
+        return render(request, "create_teachers.html", {"form": form})
 
     form = TeachersForm(request.POST)
     if form.is_valid():
         form.save()
         return redirect("get_teachers_list")
 
-    return render(request, "teachers_form.html", {"form": form})
+    return render(request, "create_teachers.html", {"form": form})
 
 
 def get_teachers_list(request):
@@ -30,10 +30,14 @@ def get_teachers_list(request):
 
 
 def edit_teacher(request, pk):
-    teacher = Teachers.objects.get(pk=pk)
+    teacher = get_object_or_404(Teachers, pk=pk)
     if request.method == "GET":
         form = TeachersForm(instance=teacher)
         return render(request, "edit_teacher.html", {"teacher": form})
+
+    if "delete" in request.POST:
+        teacher.delete()
+        return redirect("get_teachers_list")
 
     form = TeachersForm(request.POST, instance=teacher)
     if form.is_valid():
@@ -43,25 +47,13 @@ def edit_teacher(request, pk):
     return render(request, "edit_teacher.html", {"teacher": form})
 
 
-def delete_teacher(request, pk):
-    teacher = get_object_or_404(Teachers, pk=pk)
-    if request.method == "GET":
-        form = TeachersForm(instance=teacher)
-        return render(request, "edit_teacher.html", {"teacher": form})
-
-    form = TeachersForm(request.POST, instance=teacher)
-    if form.is_valid():
-        teacher.delete()
-        return redirect(reverse("get_teachers_list"))
-
-
 """ -- Part of a view for group model -- """
 
 
 def group_form(request):
     if request.method == "GET":
         form = GroupsForm()
-        return render(request, "group_form.html", {"form": form})
+        return render(request, "create_group.html", {"form": form})
 
     form = GroupsForm(request.POST)
     if form.is_valid():

@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 
 from faker import Faker
 
-from .forms import StudentForm
+from school.models import Groups
+from .forms import StudentForm, AddToGroup
 from .models import CreateStudent
 
 fake = Faker()
@@ -65,12 +66,16 @@ def get_student_list(request):
 
 
 def edit_student(request, pk):
-    student = CreateStudent.objects.get(pk=pk)
+    student = get_object_or_404(CreateStudent, pk=pk)
     if request.method == "GET":
         form = StudentForm(instance=student)
         return render(request, "edit_student.html", {"student": form})
 
     form = StudentForm(request.POST, instance=student)
+    if "delete" in request.POST:
+        student.delete()
+        return redirect("get_student_list")
+
     if form.is_valid():
         form.save()
         return redirect(reverse("get_student_list"))
@@ -78,13 +83,13 @@ def edit_student(request, pk):
     return render(request, "edit_student.html", {"student": form})
 
 
-def delete_student(request, pk):
+def add_student_to_group(request, pk):
     student = get_object_or_404(CreateStudent, pk=pk)
     if request.method == "GET":
-        form = StudentForm(instance=student)
-        return render(request, "edit_student.html", {"student": form})
+        form = AddToGroup(instance=student)
+        return render(request, "add_to_group.html", {"form": form, "student": student})
 
-    form = StudentForm(request.POST, instance=student)
+    form = AddToGroup(request.POST, instance=student)
     if form.is_valid():
-        student.delete()
-        return redirect(reverse("get_student_list"))
+        form.save()
+        return redirect("get_student_list")
