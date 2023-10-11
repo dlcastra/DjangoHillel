@@ -15,7 +15,11 @@
       <td>{{ student.first_name }}</td>
       <td>{{ student.last_name }}</td>
       <td>{{ student.birth_date|date:"Y-m-d" }}</td>
-      <td>{{ student.group }}</td>
+      <td>
+        {% for group in student.group.all %}
+          {{ group.group_name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </td>
     </tr>
     {% endfor %}
   </tbody>
