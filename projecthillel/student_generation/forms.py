@@ -37,3 +37,9 @@ class StudentForm(forms.ModelForm):
                 "The last name must not contain any numbers/Прізвище не повинно мати цифр"
             )
         return last_name
+
+
+class AddToGroup(forms.ModelForm):
+    class Meta:
+        model = CreateStudent
+        fields = ["group"]
