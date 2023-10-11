@@ -15,3 +15,6 @@ class Teachers(models.Model):
 class Groups(models.Model):
     group_name = models.CharField(max_length=100)
     curator = models.ForeignKey(Teachers, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.group_name
