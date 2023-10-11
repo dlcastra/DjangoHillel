@@ -4,7 +4,6 @@ from school.views import (
     create_teacher,
     get_teachers_list,
     edit_teacher,
-    delete_teacher,
     group_form,
     get_group_list,
     edit_group,
@@ -16,7 +15,6 @@ urlpatterns = [
     path("teacher/", create_teacher, name="teacher_form"),
     path("teachers/", get_teachers_list, name="get_teachers_list"),
     path("edit-teacher/<int:pk>", edit_teacher, name="edit_teacher"),
-    path("delete-teacher/<int:pk>", delete_teacher, name="delete_teacher"),
     # Part for groups
     path("group/", group_form, name="group_form"),
     path("groups/", get_group_list, name="get_group_list"),
