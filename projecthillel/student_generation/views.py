@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 
 from faker import Faker
 
-from school.models import Groups
 from .forms import StudentForm, AddToGroup
 from .models import CreateStudent
 

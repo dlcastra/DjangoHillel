@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from faker import Faker
 
-from teachers_generation.models import Teacher
+from teachers_generation.models import GenerateTeacher
 
 fake = Faker()
 
@@ -20,7 +20,7 @@ class Command(BaseCommand):
             )
 
         for i in range(number):
-            teacher = Teacher.objects.create(
+            teacher = GenerateTeacher.objects.create(
                 first_name=fake.first_name(),
                 last_name=fake.last_name(),
                 birth_date=fake.date(),
