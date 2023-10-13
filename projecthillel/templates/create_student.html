@@ -1,5 +1,8 @@
+<p>Формат запису дати: рррр-мм-дд</p>
+<p>Формат надання номеру: +xx (xxx) xxx-xxxx</p>
 <form action="" method="post">
     {% csrf_token %}
     {{ student }}
+    {{ student.errors }}
     <input type="submit" value="OK">
 </form>

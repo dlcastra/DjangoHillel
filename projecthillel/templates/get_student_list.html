@@ -6,6 +6,7 @@
       <th>Прізвище</th>
       <th>Дата народження</th>
       <th>Група</th>
+      <th>Номер телефону</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,7 @@
           {{ group.group_name }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
       </td>
+    <td>{{ student.phone }}</td>
     </tr>
     {% endfor %}
   </tbody>
