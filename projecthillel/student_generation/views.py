@@ -58,6 +58,8 @@ def create_student(request):
         form.save()
         return redirect("get_student_list")
 
+    return render(request, "create_student.html", {"student": form})
+
 
 def get_student_list(request):
     students = CreateStudent.objects.all()
