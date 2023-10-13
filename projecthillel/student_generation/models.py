@@ -10,6 +10,7 @@ class CreateStudent(models.Model):
     last_name = models.CharField(max_length=50)
     birth_date = models.DateField()
     group = models.ManyToManyField(Groups, related_name="group")
+    phone = models.CharField(max_length=20, null=True)
 
     def __str__(self):
         return f"{self.first_name}, {self.first_name}, {self.group}"
